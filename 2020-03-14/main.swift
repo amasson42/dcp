@@ -1,6 +1,9 @@
 
 // MARK: - function
 func arrayOfProd(array: [Int]) -> [Int] {
+    guard array.isEmpty == false else {
+        return []
+    }
     var leftProd = [Int](repeating: 1, count: array.count)
     var rightProd = [Int](repeating: 1, count: array.count)
     let li = array.count - 1
@@ -33,6 +36,8 @@ func getBruteForceAnswer(array: [Int]) -> [Int] {
     }
 }
 
+testArrayWith(array: [], answer: [])
+testArrayWith(array: [42], answer: [1])
 testArrayWith(array: [1, 2, 3, 4, 5], answer: [120, 60, 40, 30, 24])
 testArrayWith(array: [3, 2, 1], answer: [2, 3, 6])
 testArrayWith(array: [5, 6, 7, 0, 2, 4, 0], answer: [0, 0, 0, 0, 0, 0, 0])
