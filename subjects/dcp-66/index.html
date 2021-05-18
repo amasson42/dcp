@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Daily Coding Problem #66</title>
+<meta name="description" content="Coding Problem #66">
+</head>
+<body>
+<h1>Problem</h1>
+<div><p>This problem was asked by Google.</p>
+<p>In a directed graph, each node is assigned an uppercase letter. We define a path's value as the number of most frequently-occurring letter
+along that path. For example, if a path in the graph goes through "ABACA", the value of the path is 3, since there are 3 occurrences of
+'A' on the path.</p>
+<p>Given a graph with <code>n</code> nodes and <code>m</code> directed edges, return the largest value path of the graph. If the largest value is infinite, then
+return null.</p>
+<p>The graph is represented with a string and an edge list. The <code>i</code>-th character represents the uppercase letter of the <code>i</code>-th node.
+Each tuple in the edge list <code>(i, j)</code> means there is a directed edge from the <code>i</code>-th node to the <code>j</code>-th node. Self-edges are possible,
+as well as multi-edges.</p>
+<p>For example, the following input graph:</p>
+<pre><code>ABACA
+</code></pre><pre><code>[(0, 1),
+ (0, 2),
+ (2, 3),
+ (3, 4)]
+</code></pre><p>Would have maximum value 3 using the path of vertices <code>[0, 2, 3, 4]</code>, <code>(A, A, C, A)</code>.</p>
+<p>The following input graph:</p>
+<pre><code>A
+</code></pre><pre><code>[(0, 0)]
+</code></pre><p>Should return null, since we have an infinite loop.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+/solutions
+/mywork/code-*/main*
+__pycache__
+_tmp
+node_modules

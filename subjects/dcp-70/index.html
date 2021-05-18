@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Daily Coding Problem #70</title>
+<meta name="description" content="Coding Problem #70">
+</head>
+<body>
+<h1>Problem</h1>
+<div><p>This problem was asked by Google.</p>
+<p>You are given an N by M 2D matrix of lowercase letters. Determine the minimum number of columns that can be removed to ensure
+that each row is ordered from top to bottom lexicographically. That is, the letter at each column is lexicographically later
+as you go down each row. It does not matter whether each row itself is ordered lexicographically.</p>
+<p>For example, given the following table:</p>
+<pre><code>cba
+daf
+ghi
+</code></pre><p>This is not ordered because of the a in the center. We can remove the second column to make it ordered:</p>
+<pre><code>ca
+df
+gi
+</code></pre><p>So your function should return 1, since we only needed to remove 1 column.</p>
+<p>As another example, given the following table:</p>
+<pre><code>abcdef
+</code></pre><p>Your function should return 0, since the rows are already ordered (there's only one row).</p>
+<p>As another example, given the following table:</p>
+<pre><code>zyx
+wvu
+tsr
+</code></pre><p>Your function should return 3, since we would need to remove all the columns to order it.</p>
+</div>
+</body>
+</html>
