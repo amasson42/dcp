@@ -1,19 +1,19 @@
 
-all: dcpmaker
-	./dcpmaker -help
+all: Dcpmaker
+	./Dcpmaker -help
 
-.PHONY: dcpmaker
-dcpmaker:
-	@cd dcpmaker_srcs && swift build && cp .build/debug/dcpmaker ../dcpmaker
+.PHONY: Dcpmaker
+Dcpmaker:
+	@cd Dcpmaker_srcs && swift build && cp .build/debug/Dcpmaker ../Dcpmaker
 
 .PHONY: clean
 clean:
-	cd dcpmaker_srcs && swift package clean
+	cd Dcpmaker_srcs && swift package clean
 
 .PHONY: fclean
 fclean: clean
-	cd dcpmaker_srcs && swift package reset
-	rm -f dcpmaker
+	cd Dcpmaker_srcs && swift package reset
+	rm -f Dcpmaker
 	rm -rf workspace
 
 .PHONY: re

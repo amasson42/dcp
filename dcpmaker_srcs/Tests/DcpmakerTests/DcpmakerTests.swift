@@ -1,7 +1,7 @@
 import XCTest
 import class Foundation.Bundle
 
-final class dcpmakerTests: XCTestCase {
+final class DcpmakerTests: XCTestCase {
     
     func testExample() throws {
         // This is an example of a functional test case.
@@ -13,7 +13,7 @@ final class dcpmakerTests: XCTestCase {
             return
         }
 
-        let fooBinary = productsDirectory.appendingPathComponent("dcpmaker")
+        let fooBinary = productsDirectory.appendingPathComponent("Dcpmaker")
 
         let process = Process()
         process.executableURL = fooBinary

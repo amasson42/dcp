@@ -1,7 +1,7 @@
 import XCTest
 
-import dcpmakerTests
+import DcpmakerTests
 
 var tests = [XCTestCaseEntry]()
-tests += dcpmakerTests.allTests()
+tests += DcpmakerTests.allTests()
 XCTMain(tests)

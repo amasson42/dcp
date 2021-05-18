@@ -1,20 +1,19 @@
 //
-//  SubjectRust.swift
-//  dcpmaker
+//  SubjectGo.swift
+//  Dcpmaker
 //
 //  Created by Giantwow on 17/05/2021.
 //
 
 import Foundation
 
-// TODO: All this
-class SubjectRust: SubjectLanguage {
+class SubjectGo: SubjectLanguage {
     
     init() {
         fatalError("Rust is not available yet")
     }
     
-    var funcFileName: String { "func.rs" }
+    var funcFileName: String { "func.go" }
     
     let fileHeader: String =
         """
@@ -28,5 +27,6 @@ class SubjectRust: SubjectLanguage {
     func correct(subject: SubjectFormat, withFuncFilePath path: String, inWorkspace dir: String, displayTestCode: Bool) throws {
         
     }
+    
     
 }
