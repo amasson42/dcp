@@ -4,42 +4,21 @@ import Foundation
 
 final class SubjectFormatTests: XCTestCase {
     
-    // MARK: testTmpDirectory
-    func testTmpDirectory() throws {
-        let FMD = FileManager.default
-        
-        let pwdBefore = FMD.currentDirectoryPath
-        let tmpDir1: String = FMD.withTemporaryDirectory {
-            return FMD.currentDirectoryPath
-        }
-        let pwdBetween = FMD.currentDirectoryPath
-        let (tmpDir2, tmpDir3, pwdInception): (String, String, String) = FMD.withTemporaryDirectory {
-            
-            let dir2 = FMD.currentDirectoryPath
-            
-            let dir3 = FMD.withTemporaryDirectory {
-                return FMD.currentDirectoryPath
-            }
-            
-            do {
-                try FMD.createDirectory(atPath: FMD.currentDirectoryPath + "/tmplol", withIntermediateDirectories: true, attributes: nil)
-                XCTAssertTrue(FMD.changeCurrentDirectoryPath(FMD.currentDirectoryPath + "/tmplol"))
-            } catch {}
-            let incept = FMD.currentDirectoryPath
-            
-            return (dir2, dir3, incept)
-            
-        }
-        let pwdAfter = FMD.currentDirectoryPath
-        
-        XCTAssertNotEqual(tmpDir1, tmpDir2)
-        XCTAssertNotEqual(tmpDir2, tmpDir3)
-        XCTAssertNotEqual(pwdBefore, tmpDir1)
-        XCTAssertNotEqual(tmpDir2, pwdInception)
-        XCTAssertNotEqual(pwdInception, pwdAfter)
-        XCTAssertEqual(pwdBefore, pwdBetween)
-        XCTAssertEqual(pwdBetween, pwdAfter)
-    }
+    static var allTests = [
+        ("testTmpDirectory", testTmpDirectory),
+
+        ("testFormatSwiftInitVar", testFormatSwiftInitVar),
+        ("testFormatSwiftInitArray", testFormatSwiftInitArray),
+        ("testFormatSwiftInitMatrix", testFormatSwiftInitMatrix),
+
+        ("testFormatPythonInitVar", testFormatPythonInitVar),
+        ("testFormatPythonInitArray", testFormatPythonInitArray),
+        ("testFormatPythonInitMatrix", testFormatPythonInitMatrix),
+
+        ("testFormatCppInitVar", testFormatCppInitVar),
+        ("testFormatCppInitArray", testFormatCppInitArray),
+        ("testFormatCppInitMatrix", testFormatCppInitMatrix),
+    ]
     
     func testFormat() throws {
         

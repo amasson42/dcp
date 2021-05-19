@@ -4,6 +4,13 @@ import Foundation
 
 extension SubjectFormatTests {
     
+    func testFormatSwiftInitVar() throws {
+        // TODO: make tests
+    }
+    func testFormatSwiftInitArray() throws {
+        // TODO: make tests
+    }
+
     func testFormatSwiftInitMatrix() throws {
         let sub = SubjectSwift()
         
