@@ -183,7 +183,7 @@ public class SubjectCpp: SubjectLanguage {
                 var ret = "std::vector<std::vector<bool> > \(name)(\(value.count));\n"
                 for (index, elem) in value.enumerated() {
                     for v in elem {
-                        ret += "\(name)[\(index)].push_back(\(sb(v));\n"
+                        ret += "\(name)[\(index)].push_back(\(sb(v)));\n"
                     }
                 }
                 return ret
