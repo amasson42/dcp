@@ -5,6 +5,10 @@ import PackageDescription
 
 let package = Package(
     name: "Dcpmaker",
+    products: [
+        .executable(name: "Dcpmaker", targets: ["Dcpmaker"]),
+        .library(name: "SubjectFormat", targets: ["SubjectFormat"]),
+    ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
@@ -16,10 +20,18 @@ let package = Package(
         .target(
             name: "Dcpmaker",
             dependencies: [
+                "SubjectFormat",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
             ]),
+        .target(
+            name: "SubjectFormat",
+            dependencies: []
+        ),
         .testTarget(
             name: "DcpmakerTests",
             dependencies: ["Dcpmaker"]),
+        .testTarget(
+            name: "SubjectFormatTests",
+            dependencies: ["SubjectFormat"]),
     ]
 )

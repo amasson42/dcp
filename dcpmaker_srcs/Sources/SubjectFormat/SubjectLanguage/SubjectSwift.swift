@@ -7,11 +7,15 @@
 
 import Foundation
 
-class SubjectSwift: SubjectLanguage {
+public class SubjectSwift: SubjectLanguage {
     
-    var funcFileName: String { "func.swift" }
+    public init() {
+        
+    }
     
-    let fileHeader =
+    public var funcFileName: String { "func.swift" }
+    
+    public let fileHeader =
         """
 /*
  * Daily coding problem
@@ -23,7 +27,7 @@ import Foundation
 
 """
     
-    func render(function: SubjectFormat.Function) -> String {
+    public func render(function: SubjectFormat.Function) -> String {
         var rendered = "/* entrypoint */\nfunc \(function.name)("
         let params = function.parameters
         for (index, param) in params.enumerated() {
@@ -38,7 +42,7 @@ import Foundation
         return rendered
     }
     
-    func correct(subject: SubjectFormat, withFuncFilePath funcFilePath: String, inWorkspace dir: String, displayTestCode: Bool) throws {
+    public func correct(subject: SubjectFormat, withFuncFilePath funcFilePath: String, inWorkspace dir: String, displayTestCode: Bool) throws {
         
         for (index, test) in subject.tests.enumerated() {
             let ziped = zip(subject.function.parameters, test.parameters)

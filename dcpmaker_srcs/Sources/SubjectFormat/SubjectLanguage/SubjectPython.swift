@@ -7,11 +7,15 @@
 
 import Foundation
 
-class SubjectPython: SubjectLanguage {
+public class SubjectPython: SubjectLanguage {
     
-    var funcFileName: String { "func.py" }
+    public init() {
+        
+    }
     
-    let fileHeader =
+    public var funcFileName: String { "func.py" }
+    
+    public let fileHeader =
         """
 #
 # Daily coding problem
@@ -21,7 +25,7 @@ class SubjectPython: SubjectLanguage {
 
 """
     
-    func render(function: SubjectFormat.Function) -> String {
+    public func render(function: SubjectFormat.Function) -> String {
         var rendered = "#entrypoint\ndef \(function.name)("
         let params = function.parameters
         for (index, param) in params.enumerated() {
@@ -36,7 +40,7 @@ class SubjectPython: SubjectLanguage {
         return rendered
     }
 
-    func correct(subject: SubjectFormat, withFuncFilePath path: String, inWorkspace dir: String, displayTestCode: Bool) throws {
+    public func correct(subject: SubjectFormat, withFuncFilePath path: String, inWorkspace dir: String, displayTestCode: Bool) throws {
         
         for (index, test) in subject.tests.enumerated() {
             print("test[\(index)] \(test.name.debugDescription) ", terminator: "")

@@ -7,24 +7,25 @@
 
 import Foundation
 
-class SubjectJavascript: SubjectLanguage {
+// TODO: All this
+public class SubjectJavascript: SubjectLanguage {
     
-    init() {
+    public init() {
         fatalError("Javascript is not available yet")
     }
     
-    var funcFileName: String { "func.js" }
+    public var funcFileName: String { "func.js" }
     
-    let fileHeader: String =
+    public let fileHeader: String =
         """
 //
-// Daily coding problem
+// Daily coding problempublic 
 // Have fun !
 //
 
 """
     
-    func render(function: SubjectFormat.Function) -> String {
+    public func render(function: SubjectFormat.Function) -> String {
         var rendered = "//entrypoint\nfunction \(function.name)("
         let params = function.parameters
         for (index, param) in params.enumerated() {
@@ -39,7 +40,7 @@ class SubjectJavascript: SubjectLanguage {
         return rendered
     }
     
-    func correct(subject: SubjectFormat, withFuncFilePath path: String, inWorkspace dir: String, displayTestCode: Bool) throws {
+    public func correct(subject: SubjectFormat, withFuncFilePath path: String, inWorkspace dir: String, displayTestCode: Bool) throws {
         
     }
     

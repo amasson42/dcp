@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import SubjectFormat
 
 fileprivate let fm = FileManager.default
 
-func openWeb(localFile: String) throws {
+public func openWeb(localFile: String) throws {
     #if os(OSX)
     if #available(OSX 10.13, *) {
         let openProcess = Process()

@@ -6,6 +6,7 @@
 //
 
 import ArgumentParser
+import SubjectFormat
 import Foundation
 
 extension Range where Element == Int {
@@ -20,14 +21,17 @@ extension Range where Element == Int {
 
 struct Dcpmaker: ParsableCommand {
     
+//    static let workDir = URL(string: Bundle.main.executablePath!)!.deletingLastPathComponent().path
+    static let workDir = Bundle.main.bundlePath
+    
     static func workspacePath(num: Int) -> String {
-        "workspace/dcp-\(num)"
+        "\(workDir)/workspace/dcp-\(num)"
     }
     static func subjectFormatPath(num: Int) -> String {
-        "subjects/dcp-\(num)/format.json"
+        "\(workDir)/subjects/dcp-\(num)/format.json"
     }
     static func subjectHtmlPath(num: Int) -> String {
-        "subjects/dcp-\(num)/index.html"
+        "\(workDir)/subjects/dcp-\(num)/index.html"
     }
     
     static var subjectRange: Range<Int> = {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SubjectFormat: Codable {
+public struct SubjectFormat: Codable {
     
     enum ParameterType: String, Codable {
         case bool = "bool"
@@ -159,25 +159,26 @@ struct SubjectFormat: Codable {
         
     }
     
-    struct TypedParameter: Codable {
+    public struct TypedParameter: Codable {
         var type: ParameterType
         var name: String
     }
     
-    struct Function: Codable {
+    public struct Function: Codable {
         var name: String
         var parameters: [TypedParameter]
         var returnType: ParameterType
     }
     
-    struct Test: Codable {
+    public struct Test: Codable {
         var name: String
         var parameters: [ValuedParameter]
         var expectedReturn: ValuedParameter
         var expectedOutput: String
     }
     
-    var function: Function
+    public var function: Function
     
-    var tests: [Test]
+    public var tests: [Test]
+    
 }

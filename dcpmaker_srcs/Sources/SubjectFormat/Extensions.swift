@@ -9,12 +9,33 @@ import Foundation
 
 extension String: Error {}
 
-extension FileManager {
+public extension FileManager {
     
     func directoryExists(atPath path: String) -> Bool {
         var isDir: ObjCBool = true
         let exist = self.fileExists(atPath: path, isDirectory: &isDir)
         return exist && isDir.boolValue
+    }
+    
+    private static var _tmpDirHash = 0
+    private static var tmpDirHash: Int { _tmpDirHash += 1; return _tmpDirHash }
+    
+    func withTemporaryDirectory<Return: Any>(_ exec: () throws -> Return) rethrows -> Return {
+        let mainPwd = self.currentDirectoryPath
+        let tmpDirUrl: URL
+        let tmpName = ProcessInfo.processInfo.globallyUniqueString + "_tmp\(abs(Self.tmpDirHash.hashValue))"
+        if #available(macOS 10.12, *) {
+            tmpDirUrl = self.temporaryDirectory.appendingPathComponent(tmpName)
+        } else {
+            tmpDirUrl = URL(string: "/tmp/\(tmpName)")!
+        }
+        defer {
+            self.changeCurrentDirectoryPath(mainPwd)
+            try? self.removeItem(at: tmpDirUrl)
+        }
+        try? self.createDirectory(at: tmpDirUrl, withIntermediateDirectories: true, attributes: nil)
+        self.changeCurrentDirectoryPath(tmpDirUrl.path)
+        return try exec()
     }
     
 }
@@ -24,7 +45,7 @@ extension FileManager {
  * Default shell path = "/bin/bash"
  */
 @discardableResult
-func shell(_ command: String, shellPath: String = "/bin/bash", stdin: Any? = nil) throws -> (stdout: String, stderr: String, code: Int32) {
+public func shell(_ command: String, shellPath: String = "/bin/bash", stdin: Any? = nil) throws -> (stdout: String, stderr: String, code: Int32) {
     let task = Process()
     let stdoutPipe = Pipe()
     let stderrPipe = Pipe()

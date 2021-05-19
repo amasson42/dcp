@@ -7,11 +7,15 @@
 
 import Foundation
 
-class SubjectCpp: SubjectLanguage {
+public class SubjectCpp: SubjectLanguage {
     
-    var funcFileName: String { "func.cpp" }
+    public init() {
+        
+    }
     
-    let fileHeader =
+    public var funcFileName: String { "func.cpp" }
+    
+    public let fileHeader =
         """
 //
 // Daily coding problem
@@ -38,13 +42,13 @@ class SubjectCpp: SubjectLanguage {
         return rendered
     }
     
-    func render(function: SubjectFormat.Function) -> String {
+    public func render(function: SubjectFormat.Function) -> String {
         return "//entrypoint\n"
             + renderSignature(function: function)
             + " {\n    // code\n}\n"
     }
     
-    func correct(subject: SubjectFormat, withFuncFilePath funcFilePath: String, inWorkspace dir: String, displayTestCode: Bool) throws {
+    public func correct(subject: SubjectFormat, withFuncFilePath funcFilePath: String, inWorkspace dir: String, displayTestCode: Bool) throws {
         
         for (index, test) in subject.tests.enumerated() {
             let ziped = zip(subject.function.parameters, test.parameters)

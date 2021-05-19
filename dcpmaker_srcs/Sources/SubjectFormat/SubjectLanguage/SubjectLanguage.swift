@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SubjectLanguage {
+public protocol SubjectLanguage {
     
     var funcFileName: String { get }
     var fileHeader: String { get }
@@ -18,7 +18,7 @@ protocol SubjectLanguage {
     
 }
 
-extension SubjectLanguage {
+public extension SubjectLanguage {
     
     func renderFuncFile(subject: SubjectFormat) -> String {
         return self.fileHeader + render(function: subject.function)
