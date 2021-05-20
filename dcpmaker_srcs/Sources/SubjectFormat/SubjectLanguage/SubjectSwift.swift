@@ -90,7 +90,8 @@ extension FileHandle : TextOutputStream {
             
             try mainWithPrintResult.write(toFile: dir + "/main.swift", atomically: true, encoding: .utf8)
             
-            let compileResult = try shell("swiftc \(funcFilePath) \(dir)/main.swift -o \(dir)/tester")
+            let shellCmd = "swiftc \(funcFilePath) \(dir)/main.swift -o \(dir)/tester"
+            let compileResult = try shell(shellCmd)
             
             guard compileResult.code == 0 else {
                 print("❌ Does not compile")

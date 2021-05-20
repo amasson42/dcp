@@ -43,7 +43,7 @@ struct Dcpmaker: ParsableCommand {
             }
         }
         var higher = lower + 1
-        while FileManager.default.fileExists(atPath: Self.subjectHtmlPath(num: higher)) {
+        while FileManager.default.fileExists(atPath: Self.subjectFormatPath(num: higher)) {
             higher += 1
         }
         return lower..<higher
