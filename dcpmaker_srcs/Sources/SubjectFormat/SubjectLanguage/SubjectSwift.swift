@@ -145,29 +145,29 @@ extension FileHandle : TextOutputStream {
     func format(initVariable variable: SubjectFormat.ValuedParameter, toName name: String) -> String {
         switch variable {
             case .bool(value: let value):
-                return "let \(name): Bool = \(value)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value)\n"
             case .int(value: let value):
-                return "let \(name): Int = \(value)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value)\n"
             case .float(value: let value):
-                return "let \(name): Float = \(value)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value)\n"
             case .string(value: let value):
-                return "let \(name): String = \(value.debugDescription)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value.debugDescription)\n"
             case .array_bool(value: let value):
-                return "let \(name): [Bool] = \(value)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value)\n"
             case .array_int(value: let value):
-                return "let \(name): [Int] = \(value)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value)\n"
             case .array_float(value: let value):
-                return "let \(name): [Float] = \(value)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value)\n"
             case .array_string(value: let value):
-                return "let \(name): [String] = \(value.debugDescription)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value.debugDescription)\n"
             case .matrix_bool(value: let value):
-                return "let \(name): [[Bool]] = \(value)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value)\n"
             case .matrix_int(value: let value):
-                return "let \(name): [[Int]] = \(value)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value)\n"
             case .matrix_float(value: let value):
-                return "let \(name): [[Float]] = \(value)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value)\n"
             case .matrix_string(value: let value):
-                return "let \(name): [[String]] = \(value.debugDescription)\n"
+                return "let \(name): \(self.format(type: variable.type)) = \(value.debugDescription)\n"
         }
     }
     

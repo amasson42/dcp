@@ -30,8 +30,8 @@ RUN swift build --enable-test-discovery -c release
 WORKDIR /staging
 
 # Copy main executable to staging area
-#RUN cp "$(swift build --package-path /build -c release --show-bin-path)/Run" ./
-RUN cp "$(swift build --package-path /build --show-bin-path)/Run" ./
+RUN cp "$(swift build --package-path /build -c release --show-bin-path)/Dcpmaker" ./dcpmaker
+# RUN cp "$(swift build --package-path /build --show-bin-path)/Dcpmaker" ./dcpmaker
 
 # Copy any resouces from the public directory and views directory if the directories exist
 # Ensure that by default, neither the directory nor any of its contents are writable.
@@ -41,7 +41,10 @@ RUN [ -d /build/Resources ] && { mv /build/Resources ./Resources && chmod -R a-w
 # ================================
 # Run image
 # ================================
-FROM swift:5.3-focal-slim
+FROM swift:5.3-focal
+
+RUN apt-get -q update \
+    && apt-get install python3 gcc g++ rustc golang npm -y
 
 # Make sure all system packages are up to date.
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && \

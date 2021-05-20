@@ -5,11 +5,72 @@ import Foundation
 extension SubjectFormatTests {
 
     func testFormatPythonInitVar() throws {
-        // TODO: make tests
+        let sub = SubjectPython()
+        
+        let initVarCodes: [(SubjectFormat.ValuedParameter, String, String)] = [
+            (.bool(value: true), "myBool", "if myBool != True: exit(1)"),
+            (.bool(value: false), "myBool", "if myBool != False: exit(1)"),
+            (.int(value: -1), "myInt", "if myInt != -1: exit(1)"),
+            (.int(value: 0), "myInt", "if myInt != 0: exit(1)"),
+            (.int(value: 42), "myInt", "if myInt != 42: exit(1)"),
+            (.int(value: -6546546546546), "myInt", "if myInt != -6546546546546: exit(1)"),
+            (.float(value: -1.42), "myFloat", "if myFloat != -1.42: exit(1)"),
+            (.float(value: -0), "myFloat", "if myFloat != -0: exit(1)"),
+            (.float(value: 1), "myFloat", "if myFloat != 1: exit(1)"),
+            (.float(value: 546.78), "myFloat", "if myFloat != 546.78: exit(1)"),
+            (.string(value: "yay"), "myString", #"if myString != "yay": exit(1)"#),
+            (.string(value: "super"), "myString", #"if myString != "super": exit(1)"#),
+            (.string(value: ""), "myString", #"if myString != "": exit(1)"#),
+            (.string(value: "\"- >?<"), "myString", #"if myString != "\"- >?<": exit(1)"#),
+        ]
+
+        try initVarCodes.forEach { (subVariable, varName, testCode) in
+            let code = sub.format(initVariable: subVariable, toName: varName) + testCode
+            let runResult = try testPython(code: code)
+            XCTAssertEqual(runResult, 0, code)
+        }
     }
 
     func testFormatPythonInitArray() throws {
-        // TODO: make tests
+        let sub = SubjectPython()
+
+        let initVarCodes: [(SubjectFormat.ValuedParameter, String, String)] = [
+            (.array_bool(value: [true, false]), "myBoolArray",
+            """
+if len(myBoolArray) != 2: exit(1)
+if myBoolArray[0] != True: exit(1)
+if myBoolArray[1] != False: exit(1)
+"""),
+            (.array_int(value: [0, -10, 4, 65536]), "myIntArray",
+            """
+if len(myIntArray) != 4: exit(1)
+if myIntArray[0] != 0: exit(1)
+if myIntArray[1] != -10: exit(1)
+if myIntArray[2] != 4: exit(1)
+if myIntArray[3] != 65536: exit(1)
+"""),
+            (.array_float(value: [-1.42, 0, -0, 65.78]), "myFloatArray",
+            """
+if len(myFloatArray) != 4: exit(1)
+if myFloatArray[0] != -1.42: exit(1)
+if myFloatArray[1] != 0: exit(1)
+if myFloatArray[2] != -0: exit(1)
+if myFloatArray[3] != 65.78: exit(1)
+"""),
+            (.array_string(value: ["yay", "0", "", "\" >?<"]), "myStringArray", """
+if len(myStringArray) != 4: exit(1)
+if myStringArray[0] != "yay": exit(1)
+if myStringArray[1] != "0": exit(1)
+if myStringArray[2] != "": exit(1)
+if myStringArray[3] != "\\\" >?<": exit(1)
+"""),
+        ]
+
+        try initVarCodes.forEach { (subVariable, varName, testCode) in
+            let code = sub.format(initVariable: subVariable, toName: varName) + testCode
+            let runResult = try testPython(code: code)
+            XCTAssertEqual(runResult, 0, code)
+        }
     }
 
     func testFormatPythonInitMatrix() throws {

@@ -148,39 +148,39 @@ public class SubjectCpp: SubjectLanguage {
         }
         switch variable {
             case .bool(let value):
-                return "bool \(name) = \(sb(value));\n"
+                return "\(self.format(type: variable.type)) \(name) = \(sb(value));\n"
             case .int(let value):
-                return "int \(name) = \(value);\n"
+                return "\(self.format(type: variable.type)) \(name) = \(value);\n"
             case .float(let value):
-                return "float \(name) = \(value);\n"
+                return "\(self.format(type: variable.type)) \(name) = \(value);\n"
             case .string(let value):
-                return "std::string \(name) = \(value.debugDescription);\n"
+                return "\(self.format(type: variable.type)) \(name) = \(value.debugDescription);\n"
             case .array_bool(let value):
-                var ret = "std::vector<bool> \(name)(\(value.count), false);\n"
+                var ret = "\(self.format(type: variable.type)) \(name)(\(value.count), false);\n"
                 for (index, elem) in value.enumerated() {
                     ret += "\(name)[\(index)] = \(sb(elem));\n"
                 }
                 return ret
             case .array_int(value: let value):
-                var ret = "std::vector<int> \(name)(\(value.count), 0);\n"
+                var ret = "\(self.format(type: variable.type)) \(name)(\(value.count), 0);\n"
                 for (index, elem) in value.enumerated() {
                     ret += "\(name)[\(index)] = \(elem);\n"
                 }
                 return ret
             case .array_float(value: let value):
-                var ret = "std::vector<float> \(name)(\(value.count), 0);\n"
+                var ret = "\(self.format(type: variable.type)) \(name)(\(value.count), 0);\n"
                 for (index, elem) in value.enumerated() {
                     ret += "\(name)[\(index)] = \(elem);\n"
                 }
                 return ret
             case .array_string(value: let value):
-                var ret = "std::vector<std::string> \(name)(\(value.count));\n"
+                var ret = "\(self.format(type: variable.type)) \(name)(\(value.count));\n"
                 for (index, elem) in value.enumerated() {
                     ret += "\(name)[\(index)] = \(elem.debugDescription);\n"
                 }
                 return ret
             case .matrix_bool(value: let value):
-                var ret = "std::vector<std::vector<bool> > \(name)(\(value.count));\n"
+                var ret = "\(self.format(type: variable.type)) \(name)(\(value.count));\n"
                 for (index, elem) in value.enumerated() {
                     for v in elem {
                         ret += "\(name)[\(index)].push_back(\(sb(v)));\n"
@@ -188,7 +188,7 @@ public class SubjectCpp: SubjectLanguage {
                 }
                 return ret
             case .matrix_int(value: let value):
-                var ret = "std::vector<std::vector<int> > \(name)(\(value.count));\n"
+                var ret = "\(self.format(type: variable.type)) \(name)(\(value.count));\n"
                 for (index, elem) in value.enumerated() {
                     for v in elem {
                         ret += "\(name)[\(index)].push_back(\(v));\n"
@@ -196,7 +196,7 @@ public class SubjectCpp: SubjectLanguage {
                 }
                 return ret
             case .matrix_float(value: let value):
-                var ret = "std::vector<std::vector<float> > \(name)(\(value.count));\n"
+                var ret = "\(self.format(type: variable.type)) \(name)(\(value.count));\n"
                 for (index, elem) in value.enumerated() {
                     for v in elem {
                         ret += "\(name)[\(index)].push_back(\(v));\n"
@@ -204,7 +204,7 @@ public class SubjectCpp: SubjectLanguage {
                 }
                 return ret
             case .matrix_string(value: let value):
-                var ret = "std::vector<std::vector<std::string> > \(name)(\(value.count));\n"
+                var ret = "\(self.format(type: variable.type)) \(name)(\(value.count));\n"
                 for (index, elem) in value.enumerated() {
                     for v in elem {
                         ret += "\(name)[\(index)].push_back(\(v.debugDescription));\n"
