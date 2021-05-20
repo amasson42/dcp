@@ -10,6 +10,10 @@ import SubjectFormat
 
 fileprivate let fm = FileManager.default
 
+public func openIDE(localDirectory: String) throws {
+    try shell("code \(localDirectory)")
+}
+
 public func openWeb(localFile: String) throws {
     #if os(OSX)
     if #available(OSX 10.13, *) {
@@ -49,6 +53,7 @@ extension Dcpmaker.Generate {
             let subjectHtmlPath = Dcpmaker.subjectHtmlPath(num: number)
             print("Opening subject \(subjectHtmlPath)")
             
+            try openIDE(localDirectory: workspacePath + "/" + subjectLanguage.funcFileName)
             try openWeb(localFile: subjectHtmlPath)
             
         } catch {
