@@ -38,7 +38,8 @@ import Foundation
                 rendered += ", "
             }
         }
-        rendered += "-> \(self.format(type: function.returnType)) {\n    /* code */\n}\n"
+        let comments = function.comments?.reduce("", { $0 + "    // \($1)\n"} ) ?? ""
+        rendered += "-> \(self.format(type: function.returnType)) {\n\(comments)    /* code */\n}\n"
         return rendered
     }
     
@@ -73,7 +74,9 @@ import Foundation
                 }
             }
             
-            var mainWithPrintResult = main + self.format(initVariable: test.expectedReturn, toName: "expected")
+            main += self.format(initVariable: test.expectedReturn, toName: "expected")
+            
+            var mainWithPrintResult = main
             
             mainWithPrintResult += """
 var standardError = FileHandle.standardError
@@ -105,7 +108,8 @@ extension FileHandle : TextOutputStream {
                 if test.expectedOutput == result.stdout {
                     print("✅")
                 } else {
-                    print("❌ Wrong output")
+                    print("❌ Wrong output:")
+                    print(result.stdout)
                     if !test.expectedOutput.isEmpty {
                         print("expected output:")
                         print(test.expectedOutput)

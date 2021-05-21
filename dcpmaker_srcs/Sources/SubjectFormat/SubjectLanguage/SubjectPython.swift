@@ -36,7 +36,8 @@ public class SubjectPython: SubjectLanguage {
                 rendered += ", "
             }
         }
-        rendered += ":\n    # code\n\n"
+        let comments = function.comments?.reduce("", { $0 + "    # \($1)\n"} ) ?? ""
+        rendered += ":\n\(comments)    # code\n\n"
         return rendered
     }
 
@@ -74,7 +75,9 @@ from func import \(subject.function.name)
                 }
             }
             
-            var mainWithPrintResult = main + self.format(initVariable: test.expectedReturn, toName: "expected")
+            main += self.format(initVariable: test.expectedReturn, toName: "expected")
+            
+            var mainWithPrintResult = main
             
             mainWithPrintResult += """
 
@@ -95,7 +98,8 @@ def eprint(*args, **kwargs):
                 if test.expectedOutput == result.stdout {
                     print("✅")
                 } else {
-                    print("❌ Wrong output")
+                    print("❌ Wrong output:")
+                    print(result.stdout)
                     if !test.expectedOutput.isEmpty {
                         print("expected output:")
                         print(test.expectedOutput)

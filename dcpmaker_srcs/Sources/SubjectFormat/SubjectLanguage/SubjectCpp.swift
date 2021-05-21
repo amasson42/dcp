@@ -43,9 +43,10 @@ public class SubjectCpp: SubjectLanguage {
     }
     
     public func render(function: SubjectFormat.Function) -> String {
+        let comments = function.comments?.reduce("", { $0 + "    // \($1)\n"} ) ?? ""
         return "//entrypoint\n"
             + renderSignature(function: function)
-            + " {\n    // code\n}\n"
+            + " {\n\(comments)    // code\n}\n"
     }
     
     public func correct(subject: SubjectFormat, withFuncFilePath funcFilePath: String, inWorkspace dir: String, displayTestCode: Bool) throws {
@@ -83,8 +84,10 @@ public class SubjectCpp: SubjectLanguage {
                     main += ", "
                 }
             }
+            
+            main += self.format(initVariable: test.expectedReturn, toName: "expected")
 
-            var mainWithPrintResult = main + self.format(initVariable: test.expectedReturn, toName: "expected")
+            var mainWithPrintResult = main
 
             mainWithPrintResult += "std::cerr << result;\nreturn result == expected ? 0 : 1;\n}\n"
 
@@ -104,7 +107,8 @@ public class SubjectCpp: SubjectLanguage {
                 if test.expectedOutput == result.stdout {
                     print("✅")
                 } else {
-                    print("❌ Wrong output")
+                    print("❌ Wrong output:")
+                    print(result.stdout)
                     if !test.expectedOutput.isEmpty {
                         print("expected output:")
                         print(test.expectedOutput)

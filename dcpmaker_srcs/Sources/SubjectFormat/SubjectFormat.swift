@@ -166,6 +166,7 @@ public struct SubjectFormat: Codable {
     
     public struct Function: Codable {
         var name: String
+        var comments: [String]?
         var parameters: [TypedParameter]
         var returnType: ParameterType
     }

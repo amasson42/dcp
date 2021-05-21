@@ -28,7 +28,9 @@ extension SubjectFormatTests {
             let code = sub.format(initVariable: subVariable, toName: varName) + testCode
             let runResult = try testCpp(code: code)
             XCTAssertEqual(runResult.compile, 0, code)
-            XCTAssertEqual(runResult.execution, 0, code)
+            if runResult.compile == 0 {
+                XCTAssertEqual(runResult.execution, 0, code)
+            }
         }
     }
 
@@ -71,7 +73,9 @@ if (myStringArray[3] != "\\\" >?<") return 1;
             let code = sub.format(initVariable: subVariable, toName: varName) + testCode
             let runResult = try testCpp(code: code)
             XCTAssertEqual(runResult.compile, 0, code)
-            XCTAssertEqual(runResult.execution, 0, code)
+            if runResult.compile == 0 {
+                XCTAssertEqual(runResult.execution, 0, code)
+            }
         }
     }
     
@@ -147,7 +151,9 @@ return 0;
             let code = sub.format(initVariable: subVariable, toName: varName) + testCode
             let runResult = try testCpp(code: code)
             XCTAssertEqual(runResult.compile, 0, code)
-            XCTAssertEqual(runResult.execution, 0, code)
+            if runResult.compile == 0 {
+                XCTAssertEqual(runResult.execution, 0, code)
+            }
         }
     }
 }

@@ -28,7 +28,9 @@ extension SubjectFormatTests {
             let code = sub.format(initVariable: subVariable, toName: varName) + testCode
             let runResult = try testSwift(code: code)
             XCTAssertEqual(runResult.compile, 0, code)
-            XCTAssertEqual(runResult.execution, 0, code)
+            if runResult.compile == 0 {
+                XCTAssertEqual(runResult.execution, 0, code)
+            }
         }
     }
     
@@ -71,7 +73,9 @@ if myStringArray[3] != "\\\" >?<" { exit(1) }
             let code = sub.format(initVariable: subVariable, toName: varName) + testCode
             let runResult = try testSwift(code: code)
             XCTAssertEqual(runResult.compile, 0, code)
-            XCTAssertEqual(runResult.execution, 0, code)
+            if runResult.compile == 0 {
+                XCTAssertEqual(runResult.execution, 0, code)
+            }
         }
     }
 
@@ -143,7 +147,9 @@ if (myFloatMat[1][1] != Float(19.47)) { exit(1) }
             let code = sub.format(initVariable: subVariable, toName: varName) + testCode
             let runResult = try testSwift(code: code)
             XCTAssertEqual(runResult.compile, 0, code)
-            XCTAssertEqual(runResult.execution, 0, code)
+            if runResult.compile == 0 {
+                XCTAssertEqual(runResult.execution, 0, code)
+            }
         }
     }
     
